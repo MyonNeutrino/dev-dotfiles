@@ -1,0 +1,128 @@
+#=============================================================================
+# basic.toml --- basic configuration example for SpaceVim
+# Copyright (c) 2016-2022 Wang Shidong & Contributors
+# Author: Wang Shidong < wsdjeg@outlook.com >
+# URL: https://spacevim.org
+# License: GPLv3
+#=============================================================================
+
+# All SpaceVim option below [option] section
+[options]
+    # set spacevim theme. by default colorscheme layer is not loaded,
+    # if you want to use more colorscheme, please load the colorscheme
+    # layer
+    colorscheme = "gruvbox"
+    colorscheme_bg = "dark"
+    # Disable guicolors in basic mode, many terminal do not support 24bit
+    # true colors
+    enable_guicolors = false
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    statusline_separator = "nil"
+    statusline_iseparator = "bar"
+    buffer_index_type = 4
+    windows_index_type = 3
+    enable_tabline_filetype_icon = false
+    enable_statusline_mode = false
+    statusline_unicode = false
+    # Enable vim compatible mode, avoid changing origin vim key bindings
+    vimcompatible = true
+
+# Enable autocomplete layer
+[[layers]]
+name = 'autocomplete'
+auto_completion_return_key_behavior = "complete"
+auto_completion_tab_key_behavior = "smart"
+autocomplete_method = "coc"
+
+[[layers]]
+name = "default"
+
+[[layers]]
+name = 'shell'
+default_position = 'top'
+default_height = 30
+
+[[layers]]
+name = "tools"
+
+[[layers]]
+name = "lang#rust"
+format_on_save = true
+
+[[layers]]
+name = "lang#toml"
+
+[[layers]]
+name = "org"
+
+[[layers]]
+name = "lang#vue"
+
+[[layers]]
+name = "lang#python"
+
+[[layers]]
+name = "lang#php"
+
+[[layers]]
+name = "lang#markdown"
+
+[[layers]]
+name = "lang#latex"
+
+[[layers]]
+name = "lang#json"
+
+[[layers]]
+name = "lang#java"
+
+[[layers]]
+name = "lang#javascript"
+
+[[layers]]
+name = "lang#html"
+filetypes = ["html", "twig"]
+
+[[layers]]
+name = "lang#xml"
+filetypes = ["xml", "svg"]
+
+[[layers]]
+name = "lang#graphql"
+
+[[layers]]
+name = "lang#dockerfile"
+
+[[layers]]
+name = "lang#sql"
+
+[[layers]]
+name = "lsp"
+filetypes = ["rust"]
+[layers.override_cmd]
+rust = ["rls"]
+
+[[layers]]
+name = "tmux"
+
+[[layers]]
+name = "incsearch"
+
+[[layers]]
+name = "fzf"
+
+[[layers]]
+name = "debug"
+
+[[layers]]
+name = "VersionControl"
+
+[[layers]]
+name = "lang#vim"
+[options]
+#bootstrap_before = 'myspacevim#before'
+statusline_separator = 'fire'
+
+[[custom_plugins]]
+name = 'github/copilot.vim'

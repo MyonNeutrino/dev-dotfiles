@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Sync dotfiles repo and ensure that dotfiles are tangled correctly afterward
+
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+# Navigate to the directory of this script (generally ~/.dotfiles/bin/.local/bin)
+cd $(dirname $(readlink -f $0))
+cd ..
+cd ..
+cd ..
+
+echo -e "${BLUE}Stashing existing changes...${NC}"
+stash_result=$(git stash push -m "sync-dotfiles: Before syncing dotfiles")
+needs_pop=1
+if [[ $stash_result =~ "No local changes to save" ]]; then
+    needs_pop=0
+fi
+
+echo -e "${BLUE}Pulling latest changes from remote...${NC}"
+echo
+git pull origin master
+echo
+
+if [[ $needs_pop -eq 1 ]]; then
+    echo -e "${BLUE}Popping stash...${NC}"
+    echo
+    git stash pop
+fi
+
+unmerged_files=$(git diff --name-only --diff-filter=U)
+if  [[ ! -z $unmerged_files ]]; then
+    echo -e "${RED}Unmerged files detected!${NC}"
+    echo
+    printf %"s\n" $unmerged_files
+    echo
+    echo -e "${RED}Please resolve the conflicts and commit them.${NC}"
+    echo
+    echo -e "${RED}Exiting...${NC}"
+    echo
+    exit 1
+else
+  # Run stow to ensure all new dotfiles are linked
+  stow */
+  exit 0
+fi
