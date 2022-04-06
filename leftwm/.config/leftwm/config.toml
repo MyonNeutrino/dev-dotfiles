@@ -17,7 +17,7 @@ key = "p"
 
 [[keybind]]
 command = "Execute"
-value = "termite"
+value = "wezterm"
 modifier = ["modkey", "Shift"]
 key = "Return"
 
